@@ -2,7 +2,6 @@ import { bankConstants } from "../actions/constants";
 
 const initialState = {
   getBankBranchesData: [],
-  getBankBranchesFavData: [],
   getBankBranchesLoading: false,
   getBankBranchesSuccess: false,
   getBankBranchesError: null,
@@ -99,6 +98,7 @@ const updateDataWithFavList = (oldBankList, ifsc, type, city) => {
   return tempBankList;
 };
 
+// eslint-disable-next-line
 export default (state = initialState, action) => {
   switch (action.type) {
     case bankConstants.GET_BANK_BRANCHES_REQUEST:

@@ -6,7 +6,7 @@ import React from "react";
 import { IconButton, makeStyles } from "@material-ui/core";
 
 // icons
-import { Brightness1, Brightness3 } from "@material-ui/icons";
+import { Brightness3, BrightnessHigh, HelpOutline } from "@material-ui/icons";
 
 // redux
 import { useSelector, useDispatch } from "react-redux";
@@ -31,11 +31,13 @@ const useStyles = makeStyles((theme) => ({
   logo: {
     color: theme.palette.common.white,
     fontWeight: "bold",
-    fontSize: "1.5rem",
+    fontSize: "1.8rem",
+    fontFamily: "Cedarville Cursive, Cursive",
   },
   logoBtn: {
     color: theme.palette.common.white,
     background: "rgba(255,255,255,0.1)",
+    marginLeft: "8px",
   },
 }));
 
@@ -51,10 +53,22 @@ const Header = () => {
 
   return (
     <div className={cls.root}>
-      <div className={cls.logo}>BankBranches</div>
-      <IconButton className={cls.logoBtn} onClick={handleTheme}>
-        {helper.themeName === "light" ? <Brightness1 /> : <Brightness3 />}
-      </IconButton>
+      <div className={cls.logo}>Bank Branch Finder</div>
+      <div className="fc">
+        <IconButton className={cls.logoBtn} onClick={handleTheme}>
+          {helper.themeName === "light" ? <BrightnessHigh /> : <Brightness3 />}
+        </IconButton>
+        <IconButton
+          className={cls.logoBtn}
+          onClick={() =>
+            alert(
+              "Hidden feature details:\n\n1. Click on field name to sort columns according to field.\n2. Click on bank name to open respective bank page."
+            )
+          }
+        >
+          <HelpOutline />
+        </IconButton>
+      </div>
     </div>
   );
 };

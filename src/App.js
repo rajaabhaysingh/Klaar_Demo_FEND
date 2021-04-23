@@ -1,10 +1,12 @@
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import shadows from "./components/mui/shadows";
 import { ToastProvider } from "react-toast-notifications";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 // components
 import Header from "./components/header";
 import Home from "./views/home";
+import BankPage from "./views/bankPage";
 
 // redux
 import { useSelector } from "react-redux";
@@ -102,14 +104,24 @@ function App() {
   });
 
   return (
-    <ThemeProvider theme={appTheme}>
-      <ToastProvider placement="bottom-center">
-        <div className="App">
-          <Header />
-          <Home />
-        </div>
-      </ToastProvider>
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider theme={appTheme}>
+        <ToastProvider placement="bottom-center">
+          <div className="App">
+            <Header />
+            <Switch>
+              <Route path="/" exact>
+                <Home />
+              </Route>
+              <Route path="/banks/:bankID">
+                <BankPage />
+              </Route>
+              <Route>Error 404: Page not available...</Route>
+            </Switch>
+          </div>
+        </ToastProvider>
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 

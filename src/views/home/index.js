@@ -77,6 +77,7 @@ const Home = () => {
   // dispatch action on city change
   React.useEffect(() => {
     dispatch(getBankBranches(selectedCity, addToast));
+    // eslint-disable-next-line
   }, [selectedCity]);
 
   // handleSearchTextChange
@@ -145,6 +146,7 @@ const Home = () => {
                 displayData={bank.getBankBranchesData}
                 searchText={searchText}
                 city={selectedCity}
+                showFavOnly={showFavOnly}
               />
             ) : (
               <Alert severity="warning">

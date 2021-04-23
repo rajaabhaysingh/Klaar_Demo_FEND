@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosIntance = axios.create({
-  baseURL: "https://vast-shore-74260.herokuapp.com",
+  baseURL: process.env.REACT_APP_BASE_URL,
   headers: {
     "Access-Control-Allow-Origin": "*",
     "Content-Type": "application/json",
