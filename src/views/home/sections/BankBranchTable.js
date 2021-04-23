@@ -99,7 +99,7 @@ const BankBranchTable = ({ displayData, searchText, city, showFavOnly }) => {
 
   const options = {
     filterType: "dropdown",
-    responsive: "simple",
+    responsive: "stacked",
     jumpToPage: true,
     filter: true,
     fixedHeader: true,
