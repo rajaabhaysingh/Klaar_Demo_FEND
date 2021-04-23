@@ -1,5 +1,6 @@
 import React from "react";
 import clsx from "clsx";
+import { useToasts } from "react-toast-notifications";
 
 // components
 import Loader from "../../components/loader";
@@ -36,9 +37,23 @@ const useStyles = makeStyles((theme) => ({
   reactSelect: {
     marginTop: "4px",
   },
-  btn: {
+  cancelBtn: {
     marginTop: "19px",
     height: "38px",
+    backgroundColor: theme.palette.error.main,
+    color: theme.palette.common.white,
+    "&:hover": {
+      backgroundColor: theme.palette.error.main,
+    },
+  },
+  normalBtn: {
+    marginTop: "19px",
+    height: "38px",
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.common.white,
+    "&:hover": {
+      backgroundColor: theme.palette.primary.main,
+    },
   },
   gridItem: {
     padding: "16px",
@@ -53,18 +68,25 @@ const Home = () => {
   const globalCls = useGlobalStyles();
   const dispatch = useDispatch();
   const bank = useSelector((state) => state.bank);
+  const { addToast } = useToasts();
 
   const [selectedCity, setSelectedCity] = React.useState("MUMBAI");
   const [searchText, setSearchText] = React.useState("");
+  const [showFavOnly, setShowFavOnly] = React.useState(false);
 
   // dispatch action on city change
   React.useEffect(() => {
-    dispatch(getBankBranches(selectedCity));
+    dispatch(getBankBranches(selectedCity, addToast));
   }, [selectedCity]);
 
   // handleSearchTextChange
   const handleSearchTextChange = (e) => {
     setSearchText(e.target.value);
+  };
+
+  // toggleFavView
+  const toggleFavView = () => {
+    setShowFavOnly(!showFavOnly);
   };
 
   return (
@@ -92,11 +114,11 @@ const Home = () => {
           <Button
             variant="contained"
             startIcon={<Favorite />}
-            color="primary"
-            className={cls.btn}
+            className={showFavOnly ? cls.cancelBtn : cls.normalBtn}
             fullWidth
+            onClick={toggleFavView}
           >
-            Favourites
+            {showFavOnly ? "Close Favourites" : "Show Favourites"}
           </Button>
         </Grid>
         <Grid item xs={12} sm={12} md={6} lg={8} xl={8}>
@@ -122,6 +144,7 @@ const Home = () => {
               <BankTable
                 displayData={bank.getBankBranchesData}
                 searchText={searchText}
+                city={selectedCity}
               />
             ) : (
               <Alert severity="warning">

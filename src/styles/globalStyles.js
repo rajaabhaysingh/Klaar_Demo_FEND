@@ -5,10 +5,6 @@ const useGlobalStyles = makeStyles((theme) => ({
     fontSize: "0.8rem",
     color: theme.palette.text.primary,
   },
-  txtMdPri: {
-    fontSize: "0.9rem",
-    color: theme.palette.text.primary,
-  },
   txtLgPri: {
     fontSize: "1.2rem",
     color: theme.palette.text.primary,

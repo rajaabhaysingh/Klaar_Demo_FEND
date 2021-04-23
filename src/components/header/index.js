@@ -4,7 +4,6 @@ import React from "react";
 
 // styling
 import { IconButton, makeStyles } from "@material-ui/core";
-import useGlobalStyles from "../../styles/globalStyles";
 
 // icons
 import { Brightness1, Brightness3 } from "@material-ui/icons";
@@ -42,7 +41,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = () => {
   const cls = useStyles();
-  const globalCls = useGlobalStyles();
   const helper = useSelector((state) => state.helper);
   const dispatch = useDispatch();
 

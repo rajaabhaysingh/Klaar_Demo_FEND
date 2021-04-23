@@ -1,12 +1,19 @@
 import React from "react";
 import MUIDataTable from "mui-datatables";
+
+// styles
 import { Favorite, FavoriteBorderOutlined } from "@material-ui/icons";
 import { IconButton } from "@material-ui/core";
 import { useHistory } from "react-router";
 import { Alert } from "@material-ui/lab";
 
-const BankBranchTable = ({ displayData, searchText }) => {
+// redux
+import { useDispatch } from "react-redux";
+import { addToFavList } from "../../../redux/actions/bank.actions";
+
+const BankBranchTable = ({ displayData, searchText, city }) => {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const columns = [
     "Fav",
@@ -30,8 +37,13 @@ const BankBranchTable = ({ displayData, searchText }) => {
           style={{
             background: "rgba(0,0,0,0.1)",
           }}
+          onClick={() => {
+            bankDetail.fav
+              ? dispatch(addToFavList(bankDetail.ifsc, "remove", city))
+              : dispatch(addToFavList(bankDetail.ifsc, "add", city));
+          }}
         >
-          <FavoriteBorderOutlined />
+          {bankDetail.fav ? <Favorite /> : <FavoriteBorderOutlined />}
         </IconButton>,
         bankDetail.bank_name,
         bankDetail.branch,
@@ -47,7 +59,7 @@ const BankBranchTable = ({ displayData, searchText }) => {
 
   const options = {
     filterType: "dropdown",
-    responsive: "scroll",
+    responsive: "simple",
     jumpToPage: true,
     filter: true,
     fixedHeader: true,
@@ -59,9 +71,9 @@ const BankBranchTable = ({ displayData, searchText }) => {
     rowsPerPageOptions: [10, 25, 50, 100],
     search: false,
     searchText: searchText,
-    onRowClick: (rowData) => {
-      alert(rowData);
-    },
+    // onRowClick: (rowData) => {
+    //   alert(rowData);
+    // },
   };
 
   return data.length > 0 ? (

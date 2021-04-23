@@ -1,5 +1,6 @@
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import shadows from "./components/mui/shadows";
+import { ToastProvider } from "react-toast-notifications";
 
 // components
 import Header from "./components/header";
@@ -102,10 +103,12 @@ function App() {
 
   return (
     <ThemeProvider theme={appTheme}>
-      <div className="App">
-        <Header />
-        <Home />
-      </div>
+      <ToastProvider placement="bottom-center">
+        <div className="App">
+          <Header />
+          <Home />
+        </div>
+      </ToastProvider>
     </ThemeProvider>
   );
 }
